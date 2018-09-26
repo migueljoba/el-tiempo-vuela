@@ -111,6 +111,9 @@
 		</div>
 	</div>
 </div>
+
+<audio id="flute" src="{% static 'audio/flute_c_long_01.wav' %}" preload="auto"></audio>
+<audio id="clock-alarm2" src="{% static 'audio/clock-alarm2.wav' %}" preload="auto"></audio>
 <!-- JAVASCRIPT FILES -->
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -161,6 +164,12 @@ timer.addEventListener('secondsUpdated', function (e) {
 	$('#countdown-hours').html(hours);
 	$('#countdown-minutes').html(minutes);
 	$('#countdown-seconds').html(seconds);
+
+	if (hours == 0 && minutes == 0 && seconds <= 10) {
+		document.getElementById('flute').load();
+		document.getElementById('flute').play();
+	}
+
 });
 
 timer.addEventListener('started', function (e) {
@@ -172,7 +181,7 @@ timer.addEventListener('reset', function (e) {
 });
 
 timer.addEventListener('targetAchieved', function (e) {
-	$('#chronoExample .values').html('KABOOM!!');
+	document.getElementById('clock-alarm2').play();
 });
 </script>
 
