@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Countdown landing page Bootstrap template</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all,follow">
+
+	<script src="{% static 'js/jquery/jquery.js' %}"></script>
+
+
+	<!-- Bootstrap and Font Awesome css-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Google fonts-->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700">
+
+
+	<!-- Theme stylesheet-->
+	<link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+	<!-- Custom stylesheet - for your changes-->
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="favicon.png">
+	<style>
+	div.main {
+		background-image: url("file:///C:/Users/mjose/Pictures/bolivia_peru/IMG_4150.jpg");
+	}
+
+
+	</style>
+</head>
+<body>
+
+<div class="main">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="cursive">{{ params.path_image_fixed }}</h1>
+				<h2 class="sub">{{ params.title_header }}</h2>
+			</div>
+		</div>
+		<!-- countdown-->
+		<div id="countdown" class="countdown">
+			<div class="row">
+				<div class="countdown-item col-sm-4 col-xs-6">
+					<div id="countdown-hours" class="countdown-number">--</div>
+					<div class="countdown-label">horas</div>
+				</div>
+				<div class="countdown-item col-sm-4 col-xs-6">
+					<div id="countdown-minutes" class="countdown-number">--</div>
+					<div class="countdown-label">minutos</div>
+				</div>
+				<div class="countdown-item col-sm-4 col-xs-6">
+					<div id="countdown-seconds" class="countdown-number">--</div>
+					<div class="countdown-label">segundos</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="number" class="input-number" data="hours" placeholder="hh" min="0">
+				</div>
+				<div class="col-sm-4">
+					<input type="number" class="input-number" data="minutes" placeholder="mm" min="0">
+				</div>
+				<div class="col-sm-4">
+					<input type="number" class="input-number" data="seconds" placeholder="ss" min="0">
+				</div>
+
+				<div class="col-sm-12">
+					<button class="startButton">Start</button>
+					<button class="pauseButton">Pause</button>
+					<button class="stopButton">Stop</button>
+					<button class="resetButton">Reset</button>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.countdown-->
+		{% comment %}
+		<div class="mailing-list">
+			<h3 class="mailing-list-heading">Join our mailing list and we will let you know all the news!</h3>
+			<div class="row">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="email" class="sr-only"></label>
+						<input type="email" placeholder="jane.doe@example.com" id="email"
+						       class="form-control transparent">
+					</div>
+					<button class="btn btn-danger">subscribe</button>
+				</form>
+			</div>
+		</div>
+		{% endcomment %}
+	</div>
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<p>&copy;2018 BBVA Paraguay S.A.</p>
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- JAVASCRIPT FILES -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{% static 'js/jquery.cookie.js' %}"></script>
+<script src="{% static 'js/easytimer.js' %}"></script>
+<script>
+var startValuesOptions = {
+	seconds: 0,
+	minutes: 0,
+	hours: 0,
+};
+
+$('.input-number').change(function() {
+	$this = $(this);
+	let prop = $this.attr('data');
+	startValuesOptions[prop] = parseInt($this.val());
+	console.log(startValuesOptions);
+});
+
+
+var timer = new Timer();
+
+$('#countdown .startButton').click(function () {
+	timer.start({
+		countdown: true,
+		startValues: startValuesOptions,
+	});
+});
+
+$('#countdown .pauseButton').click(function () {
+	timer.pause();
+});
+
+$('#countdown .stopButton').click(function () {
+	timer.stop();
+});
+
+$('#countdown .resetButton').click(function () {
+	$('.countdown-number').html('--');
+	timer.reset();
+});
+
+timer.addEventListener('secondsUpdated', function (e) {
+	let hours = timer.getTimeValues().hours;
+	let minutes = timer.getTimeValues().minutes;
+	let seconds = timer.getTimeValues().seconds;
+
+	$('#countdown-hours').html(hours);
+	$('#countdown-minutes').html(minutes);
+	$('#countdown-seconds').html(seconds);
+});
+
+timer.addEventListener('started', function (e) {
+    $('#chronoExample .values').html(timer.getTimeValues().toString());
+});
+
+timer.addEventListener('reset', function (e) {
+    $('#chronoExample .values').html(timer.getTimeValues().toString());
+});
+
+timer.addEventListener('targetAchieved', function (e) {
+	$('#chronoExample .values').html('KABOOM!!');
+});
+</script>
+
+</body>
+</html>

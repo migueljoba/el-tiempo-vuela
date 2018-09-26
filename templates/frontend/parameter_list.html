@@ -1,0 +1,30 @@
+{% extends 'frontend/base_administration.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<table class="table">
+	<thead class="thead-dark">
+	<tr>
+		<th scope="col">#</th>
+		<th scope="col">Nombre</th>
+		<th scope="col">Título</th>
+		<th scope="col">Duración</th>
+		<th scope="col">Acción</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for param in parameters %}
+	<tr>
+		<th scope="row">{{ forloop.counter }}</th>
+		<td>{{ param.settings_name }}</td>
+		<td>{{ param.title_header }}</td>
+		<td>{{ param.time_duration }}</td>
+		<td>
+			<a href="{% url 'parameters:update' param.id %}">Editar</a>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

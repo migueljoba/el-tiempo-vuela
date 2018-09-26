@@ -1,0 +1,12 @@
+{% extends 'frontend/base_administration.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post" novalidate>
+	{% csrf_token %}
+	{{ form|crispy }}
+	<a class="btn btn-secondary" href="{% url 'parameters:list' %}" role="button">Cancelar</a>
+	<button type="submit" class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}
