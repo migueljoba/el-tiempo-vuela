@@ -1,0 +1,113 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+		<title>Prueba!!</title>
+		<style>
+			body {
+				color: #495057;
+			}
+			.countdown-number {
+				font-size: 124px;
+				line-height: 1;
+			}
+			.input-numberASD {
+				width: 50px;
+			}
+			.mw-100 {
+				max-width: 100%;
+			}
+
+		</style>
+	</head>
+	<body class="p-3 bg-light">
+
+		<div class="container-fluid">
+
+			<!-- contenedor header -->
+			<div class="row m-2">
+				<div class="col">
+					<img src="{% static 'img/logo_BBVA.svg' %}">
+				</div>
+				<div class="col">
+					<h2 class="text-right">{{ params.title_header }}</h2>
+				</div>
+			</div>
+
+			<!-- contenedor temporizador -->
+			<div id="countdown" class="row shadow-sm p-3 text-center">
+				
+				<div class="countdown-item col-sm-2 col-xs-6 offset-md-3">
+					<div id="countdown-hours" class="countdown-number">00</div>
+					<div class="countdown-label">horas</div>
+					<!--<input type="number" class="input-number" data="hours" placeholder="hh" min="0">-->
+				</div>
+				<div class="countdown-item col-sm-2 col-xs-6">
+					<div id="countdown-minutes" class="countdown-number">00</div>
+					<div class="countdown-label">minutos</div>
+					<!--<input type="number" class="input-number" data="minutes" placeholder="mm" min="0">-->
+				</div>
+				<div class="countdown-item col-sm-2 col-xs-6 mr-auto">
+					<div id="countdown-seconds" class="countdown-number">00</div>
+					<div class="countdown-label">segundos</div>
+					<!--<input type="number" class="input-number" data="seconds" placeholder="ss" min="0">-->
+				</div>
+
+				<div class="col-4 mt-4">
+					<div class="input-group">
+						<input type="number" class="input-number form-control" data="hours" placeholder="hh" min="0">
+						<input type="number" class="input-number form-control" data="minutes" placeholder="mm" min="0">
+						<input type="number" class="input-number form-control" data="seconds" placeholder="ss" min="0">
+						<div class="input-group-append" id="button-addon4">
+							<button type="button" class="btn btn-outline-info startButton">Start</button>
+							<button type="button" class="btn btn-outline-info pauseButton">Pause</button>
+							<button type="button" class="btn btn-outline-info stopButton">Stop</button>
+							<button type="button" class="btn btn-outline-info resetButton">Reset</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		
+			<!-- contenedor imagenes -->
+			<div class="row mt-3">
+				<div class="col-6 shadow-sm p-2">
+					<img class="mw-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
+				</div>
+				<div class="col-6 shadow-sm p-2">
+					<img class="mw-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}" class="img-fluid" alt="Responsive image">
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<p>&copy;2018 BBVA Paraguay S.A.</p>
+					</div>
+					<div class="col-md-6">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<audio id="flute" src="{% static 'audio/flute_c_long_01.wav' %}" preload="auto"></audio>
+		<audio id="clock-alarm2" src="{% static 'audio/clock-alarm2.wav' %}" preload="auto"></audio>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="{% static 'js/easytimer.js' %}"></script>
+		<script src="{% static 'js/timer-custom.js' %}"></script>
+	</body>
+</html>

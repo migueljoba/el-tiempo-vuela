@@ -29,5 +29,5 @@ def home(request):
     context_args = {
         'params': params
     }
-    template_name = 'base.html'
+    template_name = 'presentacion.html'
     return render(request, template_name, context=context_args)
