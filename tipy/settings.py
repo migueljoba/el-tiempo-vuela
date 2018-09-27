@@ -24,7 +24,7 @@ SECRET_KEY = '$r3=*v51yc9e1m&!mly=16^=x(z*hzdt*#&r7=d2rwakt(ihvv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -124,6 +125,6 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "/var/www/media/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
