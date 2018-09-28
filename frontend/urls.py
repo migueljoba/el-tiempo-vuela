@@ -13,25 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
 from frontend import views
 
-
 url_parameters = include(([
-                           path('', views.ParameterListView.as_view(), name='list'),
-                           path('create', views.ParameterCreateView.as_view(), name='create'),
-                           path('<int:pk>/update', views.ParameterUpdateView.as_view(), name='update'),
-                           # path('<int:pk>', especialidades.EspecialidadDetailView.as_view(), name='detail'),
-                           # path('<int:pk>/delete', especialidades.EspecialidadDeleteView.as_view(), name='delete'),
-                       ], 'parameters'), namespace='parameters')
+                              path('', views.ParameterListView.as_view(), name='list'),
+                              path('create', views.ParameterCreateView.as_view(), name='create'),
+                              path('<int:pk>/update', views.ParameterUpdateView.as_view(), name='update'),
+                              path('<int:pk>/delete', views.ParameterDeleteView.as_view(), name='delete'),
+                          ], 'parameters'), namespace='parameters')
 
+url_activities = include(([
+                              path('', views.ActivityListView.as_view(), name='list'),
+                              path('create', views.ActivityCreateView.as_view(), name='create'),
+                              path('<int:pk>/update', views.ActivityUpdateView.as_view(), name='update'),
+                              path('<int:pk>/delete', views.ActivityDeleteView.as_view(), name='delete'),
+                          ], 'activity'), namespace='activity')
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('rand_filename', views.rand_media, name='rand_media'),
-    # path('parameters', views.ParameterCreateView.as_view(), name='parameters_create'),
-    # path('parameters_list', views.ParameterListView.as_view(), name='parameters_list'),
-
-    path('parameters/', url_parameters)
+    path('parameters/', url_parameters),
+    path('activities/', url_activities),
 ]

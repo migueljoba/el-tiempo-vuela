@@ -1,0 +1,27 @@
+{% extends 'frontend/base_administration.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<table class="table">
+	<thead class="thead-dark">
+	<tr>
+		<th scope="col">Orden</th>
+		<th scope="col">Descripción</th>
+		<th scope="col">Acción</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for act in activities %}
+	<tr>
+		<th scope="row">{{ act.order }}</th>
+		<td>{{ act.description }}</td>
+		<td>
+			<a href="{% url 'activity:update' act.id %}">Editar</a>
+			<a href="{% url 'activity:delete' act.id %}">Eliminar</a>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

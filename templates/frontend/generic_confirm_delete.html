@@ -1,0 +1,26 @@
+{% extends 'frontend/base_administration.html' %}
+
+{% block content %}
+<header>
+	<h1 class="display">{{ form_title }}</h1>
+</header>
+
+<div class="row">
+	<div class="col-lg-7">
+		<div class="card">
+			<div class="card-header d-flex align-items-center">
+				<h2 class="h5 display display">Basic Form</h2>
+			</div>
+			<div class="card-body">
+				<form action="" method="post">
+					{% csrf_token %}
+					<p>¿Estás seguro que querés eliminar <strong>"{{ object }}"?</strong></p>
+					<a class="btn btn-secondary" href="{{ cancel_url }}" role="button">Cancelar</a>
+					<button type="submit" class="btn btn-danger btn-mdb">Sí. Eliminar</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+
+
+{{ act }}
+<table class="table table-hover table-light">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tema</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for act in activities %}
+    <tr>
+      <th scope="row">{{ act.order }}</th>
+      <td>{{ act.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+

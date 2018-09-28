@@ -48,37 +48,39 @@
 				<div class="countdown-item col-sm-2 col-xs-6 offset-md-3">
 					<div id="countdown-hours" class="countdown-number">00</div>
 					<div class="countdown-label">horas</div>
-					<!--<input type="number" class="input-number" data="hours" placeholder="hh" min="0">-->
 				</div>
 				<div class="countdown-item col-sm-2 col-xs-6">
 					<div id="countdown-minutes" class="countdown-number">00</div>
 					<div class="countdown-label">minutos</div>
-					<!--<input type="number" class="input-number" data="minutes" placeholder="mm" min="0">-->
 				</div>
 				<div class="countdown-item col-sm-2 col-xs-6 mr-auto">
 					<div id="countdown-seconds" class="countdown-number">00</div>
 					<div class="countdown-label">segundos</div>
-					<!--<input type="number" class="input-number" data="seconds" placeholder="ss" min="0">-->
 				</div>
 
-				<div class="col-4 mt-4">
-					<div class="input-group">
-						<input type="number" class="input-number form-control" data="hours" placeholder="hh" min="0">
-						<input type="number" class="input-number form-control" data="minutes" placeholder="mm" min="0">
-						<input type="number" class="input-number form-control" data="seconds" placeholder="ss" min="0">
-						<div class="input-group-append" id="button-addon4">
-							<button type="button" class="btn btn-outline-info startButton" title="play">
-								<i class="fas fa-play"></i>
-							</button>
-							<button type="button" class="btn btn-outline-info pauseButton" title="pause">
-								<i class="fas fa-pause"></i>
-							</button>
-							<button type="button" class="btn btn-outline-info stopButton" title="stop">
-								<i class="fas fa-stop"></i>
-							</button>
-							<button type="button" class="btn btn-outline-info resetButton" title="reset">
-								<i class="fas fa-redo-alt"></i>
-							</button>
+				<!-- contenedor de controles -->
+				<div class="col-12 mt-4">
+					<div class="row justify-content-md-center">
+						<div class="col-6 col-xl-4">
+							<div class="input-group">
+								<input type="number" class="input-number form-control" data="hours" placeholder="hh" min="0">
+								<input type="number" class="input-number form-control" data="minutes" placeholder="mm" min="0">
+								<input type="number" class="input-number form-control" data="seconds" placeholder="ss" min="0">
+								<div class="input-group-append" id="button-addon4">
+									<button type="button" class="btn btn-outline-info startButton" title="play">
+										<i class="fas fa-play"></i>
+									</button>
+									<button type="button" class="btn btn-outline-info pauseButton" title="pause">
+										<i class="fas fa-pause"></i>
+									</button>
+									<button type="button" class="btn btn-outline-info stopButton" title="stop">
+										<i class="fas fa-stop"></i>
+									</button>
+									<button type="button" class="btn btn-outline-info resetButton" title="reset">
+										<i class="fas fa-redo-alt"></i>
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -87,14 +89,22 @@
 
 			<!-- contenedor imagenes -->
 			<div class="row mt-3">
-				<div class="col-6 shadow-sm p-2">
+				{% comment %}
+				<div id="container-left" class="col-6 shadow-sm p-2">
 					<img class="w-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
 				</div>
+				{% endcomment %}
+				<div id="container-left" class="col-6 shadow-sm p-2">
+					{% include 'section_activities.html' %}
+				</div>
+
 				<div id="container-dynamic-img" class="col-6 shadow-sm p-2">
 					<img class="w-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
 				</div>
 				<div class="col-12">
-					<button id="slider-trigger" class="btn btn-lg btn-outline-info"><i class="fas fa-camera"></i></button>
+					<a class="btn btn-sm btn-outline-info" href="{% url 'activity:list' %}" target="_blank" role="button"><i class="fas fa-list-ol"></i></a>
+					<a class="btn btn-sm btn-outline-info" href="{% url 'parameters:list' %}" target="_blank" role="button"><i class="fas fa-cog"></i></a>
+					<button id="slider-trigger" class="btn btn-sm btn-outline-info"><i class="fas fa-camera"></i></button>
 				</div>
 			</div>
 		</div>
@@ -102,10 +112,8 @@
 		<div class="footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-6 offset-6">
 						<p>&copy;2018 BBVA Paraguay S.A.</p>
-					</div>
-					<div class="col-md-6">
 					</div>
 				</div>
 			</div>
