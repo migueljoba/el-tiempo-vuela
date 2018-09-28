@@ -65,7 +65,11 @@ class ParameterDeleteView(DeleteView):
     }
 
 def home(request):
-    params = Parameter.objects.get(pk=1)
+    try:
+        params = Parameter.objects.get(pk=1)
+    except Exception as e:
+        print(e)
+        params = {}
 
     activities = Activity.objects.all()
 
