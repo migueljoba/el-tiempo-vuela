@@ -3,8 +3,9 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from .models import Parameter
-
-
+import os, random
+from tipy import settings
+from django.http.response import JsonResponse
 # Create your views here.
 
 class ParameterCreateView(CreateView):
@@ -31,3 +32,10 @@ def home(request):
     }
     template_name = 'presentacion.html'
     return render(request, template_name, context=context_args)
+
+
+
+def rand_media(request):
+    rand_filename = random.choice(os.listdir(settings.MEDIA_ROOT))
+    media_url = '{}{}'.format(settings.MEDIA_URL, rand_filename)
+    return JsonResponse({'media_url': media_url})

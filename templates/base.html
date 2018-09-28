@@ -28,26 +28,26 @@
 	<link rel="shortcut icon" href="favicon.png">
 	<style>
 	div.main {
-		background-image: url("file:///C:/Users/mjose/Pictures/bolivia_peru/IMG_4150.jpg");
+		background-image: url("{{ MEDIA_URL }}{{ params.path_image_fixed }}");
 	}
-
 
 	</style>
 </head>
 <body>
 
 <div class="main">
+	<!--<img class="establecimiento-avatar" src="{{ MEDIA_URL}}IMG_4152.jpg" alt="Sin imagen...">-->
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1 class="cursive">{{ params.path_image_fixed }}</h1>
-				<h2 class="sub">{{ params.title_header }}</h2>
+				<h1 class="cursive">{{ params.title_header }}</h1>
+				<!--<h2 class="sub">{{ params.title_header }}</h2>-->
 			</div>
 		</div>
 		<!-- countdown-->
 		<div id="countdown" class="countdown">
-			<div class="row">
+			<div class="row bg-light">
 				<div class="countdown-item col-sm-4 col-xs-6">
 					<div id="countdown-hours" class="countdown-number">--</div>
 					<div class="countdown-label">horas</div>
@@ -169,7 +169,6 @@ timer.addEventListener('secondsUpdated', function (e) {
 		document.getElementById('flute').load();
 		document.getElementById('flute').play();
 	}
-
 });
 
 timer.addEventListener('started', function (e) {

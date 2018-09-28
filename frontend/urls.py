@@ -29,6 +29,7 @@ url_parameters = include(([
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('rand_filename', views.rand_media, name='rand_media'),
     # path('parameters', views.ParameterCreateView.as_view(), name='parameters_create'),
     # path('parameters_list', views.ParameterListView.as_view(), name='parameters_list'),
 
