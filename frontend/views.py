@@ -83,13 +83,27 @@ def home(request):
 
 def rand_media(request):
     """
-    Controlador para obtener URL de archivo media aleatoriamente.
+    Controlador para obtener URL de archivo dentro
+    de la galería, aleatoriamente.
     """
 
-    # lista de archivos en directorio media
-    filename_list = os.listdir(settings.MEDIA_ROOT)
+    # obtener parámetros de configuración
+    try:
+        params = Parameter.objects.filter(active=True)[0]
+    except Exception as e:
+        params = Parameter()
+        params.path_image_folder = 'galeria'
 
-    while True:
+    # formar el path a la galería
+    img_folder = params.path_image_folder
+    img_gallery_path = os.path.join(settings.MEDIA_ROOT, img_folder)
+
+    # lista de archivos en directorio media
+    filename_list = os.listdir(img_gallery_path)
+
+    count = len(filename_list)
+
+    while True and count > 0:
         filename_rand = random.choice(filename_list)
 
         prev_url = request.session.get('filename_rand')
@@ -99,4 +113,10 @@ def rand_media(request):
             break
 
     media_url = '{}{}'.format(settings.MEDIA_URL, filename_rand)
-    return JsonResponse({'media_url': media_url})
+
+    dict_response = {
+        'count': count,
+        'media_url': media_url
+    }
+
+    return JsonResponse(dict_response)

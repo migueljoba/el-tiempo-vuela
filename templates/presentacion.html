@@ -25,16 +25,22 @@
 				max-width: 100%;
 			}
 
+			.bar-company {
+				width: 100%;
+				position: fixed;
+				top: 0;
+				z-index: 9999;
+			}
 		</style>
 	</head>
 	<body class="p-3 bg-light">
-
+		<img src="{% static 'img/bar-company.svg' %}" class="bar-company w-100">
 		<div class="container-fluid">
 
 			<!-- contenedor header -->
 			<div class="row m-2">
 				<div class="col">
-					<img src="{% static 'img/logo_BBVA.svg' %}">
+					<img src="{% static 'img/logo-company.svg' %}">
 				</div>
 				<div class="col">
 					<h2 class="text-right">{{ params.title_header }}</h2>
@@ -58,7 +64,7 @@
 					<div class="countdown-label">segundos</div>
 				</div>
 
-				<!-- contenedor de controles -->
+				<!-- contenedor de controles timer -->
 				<div class="col-12 mt-4">
 					<div class="row justify-content-md-center">
 						<div class="col-6 col-xl-4">
@@ -85,22 +91,26 @@
 					</div>
 				</div>
 			</div>
-		
+			
+			<!-- contenedor agenda -->
+			<div class="row mt-3" id="container-agenda">
+				<div id="container-leftASD" class="col-6 offset-3 shadow-sm p-2">
+					<img class="w-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
+				</div>
+			</div>
 
-			<!-- contenedor imagenes -->
-			<div class="row mt-3">
-				{% comment %}
+			<!-- contenedor agenda + imagenes -->
+			<div class="row mt-3 d-none" id="container-agenda-images">
 				<div id="container-left" class="col-6 shadow-sm p-2">
 					<img class="w-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
 				</div>
-				{% endcomment %}
-				<div id="container-left" class="col-6 shadow-sm p-2">
-					{% include 'section_activities.html' %}
-				</div>
-
 				<div id="container-dynamic-img" class="col-6 shadow-sm p-2">
-					<img class="w-100" src="{{ MEDIA_URL }}{{ params.path_image_fixed }}">
+					<img class="w-100" src="{% static 'img/default-img.svg' %}">
 				</div>
+			</div>
+
+			<!-- contenedor de controles presentación -->
+			<div class="row">
 				<div class="col-12">
 					<a class="btn btn-sm btn-outline-info" href="{% url 'activity:list' %}" target="_blank" role="button"><i class="fas fa-list-ol"></i></a>
 					<a class="btn btn-sm btn-outline-info" href="{% url 'parameters:list' %}" target="_blank" role="button"><i class="fas fa-cog"></i></a>
