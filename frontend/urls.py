@@ -30,9 +30,14 @@ url_activities = include(([
                               path('<int:pk>/delete', views.ActivityDeleteView.as_view(), name='delete'),
                           ], 'activity'), namespace='activity')
 
+url_gallery = include(([
+                           path('upload', views.FileFieldView.as_view(), name='upload'),
+                       ], 'gallery'), namespace='gallery')
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('rand_filename', views.rand_media, name='rand_media'),
     path('parameters/', url_parameters),
     path('activities/', url_activities),
+    path('gallery/', url_gallery)
 ]

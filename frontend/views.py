@@ -4,11 +4,51 @@ import random
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.list import ListView
 
 from tipy import settings
+from .forms import FileFieldForm
 from .models import Parameter, Activity
+
+
+def handle_uploaded_file(dest_path, f):
+    img_path = os.path.join(dest_path, f.name)
+    with open(img_path, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+class FileFieldView(FormView):
+    form_class = FileFieldForm
+    template_name = 'gallery/upload.html'
+    success_url = reverse_lazy('gallery:upload')
+
+    def post(self, request, *args, **kwargs):
+
+        # obtener parámetros de configuración
+        try:
+            params = Parameter.objects.filter(active=True)[0]
+        except Exception as e:
+            params = Parameter()
+            params.path_image_folder = 'galeria'
+
+        # formar el path a la galería
+        img_folder = params.path_image_folder
+        img_gallery_path = os.path.join(settings.MEDIA_ROOT, img_folder)
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file_field')
+
+        if form.is_valid():
+            for f in files:
+                handle_uploaded_file(img_gallery_path, f)
+
+            return self.form_valid(form)
+
+        else:
+            return self.form_invalid(form)
 
 
 class ActivityCreateView(CreateView):
@@ -26,6 +66,7 @@ class ActivityUpdateView(UpdateView):
     model = Activity
     fields = '__all__'
     success_url = reverse_lazy('activity:list')
+
 
 class ActivityDeleteView(DeleteView):
     model = Activity
@@ -54,6 +95,7 @@ class ParameterListView(ListView):
     model = Parameter
     context_object_name = 'parameters'
 
+
 class ParameterDeleteView(DeleteView):
     model = Parameter
     fields = '__all__'
@@ -63,6 +105,7 @@ class ParameterDeleteView(DeleteView):
         'form_title': 'Eliminar parámetro',
         'cancel_url': success_url
     }
+
 
 def home(request):
     try:
