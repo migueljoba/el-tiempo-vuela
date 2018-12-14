@@ -112,7 +112,7 @@ def rand_media(request):
             request.session['filename_rand'] = filename_rand
             break
 
-    media_url = '{}{}'.format(settings.MEDIA_URL, filename_rand)
+    media_url = '{}{}'.format(settings.MEDIA_URL, os.path.join(img_folder, filename_rand))
 
     dict_response = {
         'count': count,
