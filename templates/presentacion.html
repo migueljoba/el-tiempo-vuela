@@ -31,16 +31,20 @@
 				top: 0;
 				z-index: 9999;
 			}
+
+			#img-logo {
+				height: 50px;
+			}
 		</style>
 	</head>
 	<body class="p-3 bg-light">
-		<img src="{% static 'img/bar-company.svg' %}" class="bar-company w-100">
+	
 		<div class="container-fluid">
 
 			<!-- contenedor header -->
 			<div class="row m-2">
 				<div class="col">
-					<img src="{% static 'img/logo-company.svg' %}">
+					<img id="img-logo" src="{% static 'img/logo-company.svg' %}">
 				</div>
 				<div class="col">
 					<h2 class="text-right">{{ params.title_header }}</h2>
